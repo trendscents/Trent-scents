@@ -28,7 +28,8 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opa
 background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* preloader: the one orchestrated moment */
-#pre{position:fixed;inset:0;z-index:100;background:#000;display:grid;place-items:center;transition:opacity .9s .1s,visibility 0s 1s}
+#pre{position:fixed;inset:0;z-index:100;background:#000;display:grid;place-items:center;transition:opacity .9s .1s,visibility 0s 1s;animation:preOut .8s 3s forwards}
+@keyframes preOut{to{opacity:0;visibility:hidden;pointer-events:none}}
 #pre img{width:72px;animation:breathe 1.6s ease-in-out infinite}
 #pre p{margin-top:1rem;font:italic 400 1.4rem var(--serif);letter-spacing:.02em;color:var(--brass)}
 .pre-in{text-align:center}
@@ -236,7 +237,11 @@ footer small{display:block;margin-top:1.5rem;color:var(--smoke)}
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
 <script>
 (function(){
-const D=window.TS,$=s=>document.querySelector(s),root=document.documentElement;
+const $=s=>document.querySelector(s),root=document.documentElement;
+const done=()=>root.classList.add("loaded");
+addEventListener("load",()=>setTimeout(done,900));setTimeout(done,2500);
+const D=window.TS;
+if(!D){done();document.body.insertAdjacentHTML("afterbegin",'<p style="position:fixed;z-index:200;top:0;left:0;right:0;padding:1rem;background:#c2a36b;color:#000;text-align:center">Missing file: upload assets/data.js to your GitHub repository.</p>');return;}
 const fmt=n=>"LKR "+n.toLocaleString("en-US");
 const wa=m=>"https://wa.me/"+D.whatsapp+"?text="+encodeURIComponent(m);
 const full=p=>p.brand+" "+p.name+(p.sub?" "+p.sub:"");
@@ -264,8 +269,6 @@ $("#wal").href=wa("Hi Trend Scents");$("#wal").textContent="WhatsApp  "+D.phoneS
 document.querySelectorAll("[data-wa]").forEach(a=>{a.href=wa(a.dataset.wa);a.target="_blank";a.rel="noopener"});
 
 /* preloader */
-const done=()=>root.classList.add("loaded");
-addEventListener("load",()=>setTimeout(done,900));setTimeout(done,3500);
 
 /* motion: needs libraries, site works without them */
 function motion(){
