@@ -1,43 +1,296 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Trend Scents | Branded perfumes, 10 ml decants and full bottles</title>
+<meta name="description" content="Branded perfumes in 10 ml decants and full 100 ml bottles. Order on WhatsApp. Trend Scents, Sri Lanka.">
+<meta name="theme-color" content="#000000">
+<meta property="og:title" content="Trend Scents">
+<meta property="og:description" content="Try the icons. Keep the one. Order on WhatsApp.">
+<meta property="og:image" content="assets/img/lion.webp">
+<link rel="icon" href="assets/img/logo-gold.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,600&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#000;--bone:#ece5d6;--smoke:#8b867b;--brass:#c2a36b;--line:rgba(236,229,214,.16);
+--serif:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;--sans:"Instrument Sans",system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);scroll-behavior:auto}
+body{background:var(--ink);color:var(--bone);font:400 1rem/1.6 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.serif{font-family:var(--serif);font-variation-settings:"opsz" 96}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:90;opacity:.07;
+background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
-on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
+/* preloader: the one orchestrated moment */
+#pre{position:fixed;inset:0;z-index:100;background:#000;display:grid;place-items:center;transition:opacity .9s .1s,visibility 0s 1s}
+#pre img{width:72px;animation:breathe 1.6s ease-in-out infinite}
+#pre p{margin-top:1rem;font:italic 400 1.4rem var(--serif);letter-spacing:.02em;color:var(--brass)}
+.pre-in{text-align:center}
+.loaded #pre{opacity:0;visibility:hidden}
+@keyframes breathe{50%{opacity:.35;transform:translateY(-4px)}}
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1.1rem clamp(1.2rem,4vw,3.5rem);mix-blend-mode:difference}
+.brand{display:flex;align-items:center;gap:.7rem;font:600 1.15rem var(--serif)}
+.brand img{width:26px}
+.pill{border:1px solid var(--bone);border-radius:99px;padding:.55rem 1.15rem;font-weight:500;font-size:.92rem;transition:background .3s,color .3s}
+.pill:hover{background:var(--bone);color:#000}
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+/* hero */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;padding:7rem clamp(1.2rem,4vw,3.5rem) 4rem;overflow:hidden}
+.hero h1{font:400 clamp(3.2rem,9vw,9.5rem)/.88 var(--serif);font-variation-settings:"opsz" 96;letter-spacing:-.035em}
+.hero h1 span{display:block;overflow:hidden;padding-bottom:.08em}
+.hero h1 i{display:block;font-style:italic;color:var(--brass);transform:translateY(105%);animation:up 1.2s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:1.35s}
+.hero h1 span:first-child i{color:var(--bone);animation-delay:1.15s}
+@keyframes up{to{transform:none}}
+.hero p{max-width:30rem;margin:2rem 0 2.2rem;color:#cfc8b8;font-size:1.08rem}
+.hero p b{color:var(--bone);font-weight:600}
+.cta{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:1rem 1.7rem;border-radius:99px;font-weight:600;background:var(--bone);color:#000;transition:transform .35s cubic-bezier(.2,.8,.2,1),background .3s}
+.btn:hover{transform:translateY(-3px);background:#fff}
+.btn.ghost{background:none;color:var(--bone);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--bone);background:none}
+.hero-art{position:relative;height:min(82vh,760px);display:grid;place-items:center}
+.hero-art::before{content:"";position:absolute;inset:8% 0;background:radial-gradient(closest-side,rgba(184,144,47,.38),transparent 72%);filter:blur(20px)}
+.hero-art img{position:relative;height:100%;width:auto;max-width:none;object-fit:contain;will-change:transform;opacity:0;animation:fade 1.4s 1s forwards}
+@keyframes fade{to{opacity:1}}
+.ghost-word{position:absolute;left:-2vw;bottom:-3vw;font:italic 400 clamp(8rem,26vw,28rem)/.8 var(--serif);color:transparent;-webkit-text-stroke:1px rgba(236,229,214,.09);white-space:nowrap;pointer-events:none;user-select:none}
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
+/* ticker */
+.ticker{border-block:1px solid var(--line);overflow:hidden;padding:1rem 0;white-space:nowrap}
+.ticker div{display:inline-flex;gap:3.5rem;animation:slide 38s linear infinite;padding-right:3.5rem}
+.ticker span{font:italic 400 1.35rem var(--serif);color:var(--bone)}
+.ticker span::after{content:"";display:inline-block;width:5px;height:5px;margin-left:3.5rem;border-radius:50%;background:var(--brass);vertical-align:middle}
+@keyframes slide{to{transform:translateX(-50%)}}
 
-jobs:
-  # Single deploy job since we're just deploying
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
+/* collection */
+#collection{position:relative;overflow:hidden}
+.glows{position:absolute;inset:0;z-index:0}
+.glows div{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;background:radial-gradient(60% 70% at 38% 50%,var(--g),transparent 70%)}
+.glows div.on{opacity:.34}
+.sec-head{position:relative;z-index:2;padding:6rem clamp(1.2rem,4vw,3.5rem) 2rem;max-width:60rem}
+.sec-head h2,.offer h2,.order h2{font:400 clamp(2.4rem,5.4vw,5rem)/.98 var(--serif);font-variation-settings:"opsz" 96;letter-spacing:-.025em}
+.sec-head p{margin-top:1rem;color:#bfb8a8;max-width:34rem}
+.track{position:relative;z-index:2;display:flex;flex-direction:column}
+.panel{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;padding:3rem clamp(1.2rem,4vw,3.5rem);background:radial-gradient(70% 60% at 50% 30%,color-mix(in srgb,var(--g) 30%,transparent),transparent 70%)}
+.panel figure{height:48vh;display:grid;place-items:center}
+.panel figure img{max-height:100%;width:auto;object-fit:contain;filter:drop-shadow(0 30px 50px rgba(0,0,0,.6))}
+.panel h3{font:400 clamp(2.4rem,7vw,4.6rem)/.95 var(--serif);font-variation-settings:"opsz" 96;letter-spacing:-.025em}
+.panel h3 em{display:block;font-size:.42em;color:var(--brass);margin-top:.5rem;letter-spacing:0}
+.brandn{color:var(--smoke);font-size:1rem;margin-bottom:.6rem}
+.mood{color:#cfc8b8;margin:1rem 0 1.4rem;max-width:26rem}
+.sizes{display:flex;gap:.8rem;flex-wrap:wrap}
+.size{display:block;text-align:left;border:1px solid var(--line);border-radius:14px;padding:.9rem 1.2rem;min-width:9.5rem;transition:border-color .3s,background .3s,transform .35s cubic-bezier(.2,.8,.2,1);backdrop-filter:blur(6px);background:rgba(0,0,0,.35)}
+.size:hover{border-color:var(--bone);transform:translateY(-3px);background:rgba(236,229,214,.08)}
+.size small{display:block;color:var(--smoke);font-size:.85rem}
+.size b{font:600 1.5rem var(--serif)}
+.size.off{opacity:.45;pointer-events:none}
+.bar{position:absolute;left:0;bottom:0;height:2px;background:var(--brass);width:0;z-index:5;display:none}
+.counter{position:absolute;right:clamp(1.2rem,4vw,3.5rem);bottom:1.6rem;z-index:5;font:italic 400 1.3rem var(--serif);color:var(--smoke);display:none}
+@media(min-width:900px){
+ .h .sec-head{position:absolute;top:0;left:0}
+ .h{height:100vh}
+ .h .track{flex-direction:row;height:100%;width:max-content;will-change:transform}
+ .h .panel{width:100vw;min-width:100vw;height:100vh;grid-template-columns:1.1fr .9fr;padding-top:7rem;background:none}
+ .h .panel figure{height:68vh}
+ .h .panel:first-child{padding-left:clamp(1.2rem,4vw,3.5rem)}
+ .h .bar,.h .counter{display:block}
+}
+@media(min-width:900px){.h .sec-head{display:none}.hh{display:block}}
+.hh{display:none;position:absolute;z-index:6;top:5.2rem;left:clamp(1.2rem,4vw,3.5rem);font:italic 400 1.2rem var(--serif);color:var(--smoke)}
+
+/* offer */
+.offer{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.5rem,5vw,5rem);align-items:center;padding:7rem clamp(1.2rem,4vw,3.5rem)}
+.offer img{width:100%;border-radius:4px;box-shadow:0 40px 90px rgba(0,0,0,.7);outline:1px solid var(--line);outline-offset:10px}
+.offer p{margin:1.2rem 0 1.6rem;color:#cfc8b8;max-width:28rem}
+.price{display:flex;align-items:baseline;gap:1rem;margin-bottom:1.8rem}
+.price b{font:400 clamp(2.6rem,5vw,4.4rem) var(--serif);color:var(--brass)}
+.price s{color:var(--smoke);font-size:1.2rem}
+
+/* price list */
+.list{padding:3rem clamp(1.2rem,4vw,3.5rem) 6rem;max-width:62rem;margin:auto}
+.list h2{font:400 clamp(2rem,4vw,3.2rem) var(--serif);margin-bottom:1.5rem}
+table{width:100%;border-collapse:collapse}
+th{font-weight:500;color:var(--smoke);text-align:right;padding:.6rem 0;font-size:.9rem}
+th:first-child,td:first-child{text-align:left}
+td{padding:1.05rem 0;border-top:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums}
+td:first-child{font:400 1.3rem var(--serif);text-align:left}
+td:first-child small{display:block;font:400 .85rem var(--sans);color:var(--smoke)}
+tr.row{cursor:pointer;transition:background .3s}
+tr.row:hover{background:rgba(236,229,214,.05)}
+
+/* reviews */
+.reviews{display:flex;gap:1.2rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:1rem clamp(1.2rem,4vw,3.5rem) 3rem;scrollbar-width:none}
+.reviews::-webkit-scrollbar{display:none}
+.rv{flex:0 0 min(30rem,82vw);scroll-snap-align:start;border-left:1px solid var(--brass);padding:.3rem 0 .3rem 1.6rem}
+.rv p{font:italic 400 clamp(1.4rem,2.2vw,1.9rem)/1.3 var(--serif)}
+.rv cite{display:block;margin-top:1.2rem;font-style:normal;color:var(--smoke);font-size:.95rem}
+.rvh{padding:5rem clamp(1.2rem,4vw,3.5rem) 1.5rem}
+.rvh h2{font:400 clamp(2.2rem,4.6vw,4rem)/1 var(--serif);letter-spacing:-.02em}
+.rvh p{color:var(--smoke);margin-top:.8rem}
+
+/* how to order */
+.order{padding:6rem clamp(1.2rem,4vw,3.5rem);border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1.3fr;gap:3rem}
+.steps{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:3.2rem 1fr;padding:1.4rem 0;border-bottom:1px solid var(--line)}
+.steps li::before{content:counter(s);font:italic 400 2.2rem/1 var(--serif);color:var(--brass)}
+.steps b{display:block;font:400 1.5rem var(--serif);margin-bottom:.2rem}
+.steps span{color:#bfb8a8}
+
+footer{padding:4rem clamp(1.2rem,4vw,3.5rem) 6rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:2rem;flex-wrap:wrap;align-items:flex-end}
+footer .big{font:italic 400 clamp(3rem,9vw,8rem)/.9 var(--serif);letter-spacing:-.03em}
+footer a{display:block;color:var(--bone);border-bottom:1px solid var(--line);padding:.2rem 0;margin-top:.7rem;transition:border-color .3s}
+footer a:hover{border-color:var(--brass)}
+footer small{display:block;margin-top:1.5rem;color:var(--smoke)}
+.fab{position:fixed;right:1.1rem;bottom:1.1rem;z-index:60;background:#25d366;color:#04210f;font-weight:600;border-radius:99px;padding:.85rem 1.3rem;box-shadow:0 10px 30px rgba(0,0,0,.5);transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.fab:hover{transform:translateY(-3px)}
+
+/* reveal only when JS runs */
+.js .rise{opacity:0;transform:translateY(28px);transition:opacity .9s,transform .9s cubic-bezier(.2,.8,.2,1)}
+.js .rise.in{opacity:1;transform:none}
+
+@media(max-width:899px){
+ .hero{grid-template-columns:1fr;padding-top:6rem}
+ .hero-art{height:50vh;order:-1;margin-top:1rem}
+ .offer,.order{grid-template-columns:1fr}
+ .hh{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+ *{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+ .hero h1 i{transform:none}.hero-art img{opacity:1}.js .rise{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div id="pre"><div class="pre-in"><img src="assets/img/logo-gold.png" alt=""><p>Trend Scents</p></div></div>
+
+<nav>
+  <a class="brand" href="#top"><img src="assets/img/logo-white.png" alt="">Trend Scents</a>
+  <a class="pill" data-wa="Hi Trend Scents, I'd like to order a perfume." href="#">Order on WhatsApp</a>
+</nav>
+
+<header class="hero" id="top">
+  <div>
+    <h1><span><i>Try the icons.</i></span><span><i>Keep the one.</i></span></h1>
+    <p>Branded perfumes in <b>10 ml decants</b> and full <b>100 ml bottles</b>. Pick your scent, tap WhatsApp, and we confirm the order in chat. <b id="soldline"></b></p>
+    <div class="cta">
+      <a class="btn" data-wa="Hi Trend Scents, I'd like to order a perfume." href="#">Order on WhatsApp</a>
+      <a class="btn ghost" href="#collection">See the collection</a>
+    </div>
+  </div>
+  <div class="hero-art"><img id="heroimg" src="assets/img/lion.webp" alt="Rayhaan Lion perfume bottle with gold swirl"></div>
+  <div class="ghost-word" aria-hidden="true">Trend</div>
+</header>
+
+<div class="ticker" aria-label="Latest from Trend Scents"><div id="tick"></div></div>
+
+<section id="collection" class="h">
+  <div class="glows" id="glows"></div>
+  <div class="sec-head rise"><h2>The collection</h2><p>Every scent comes as a 10 ml decant to try, or a full 100 ml bottle to keep. Tap a size to order it.</p></div>
+  <div class="hh">The collection &nbsp;·&nbsp; scroll</div>
+  <div class="track" id="track"></div>
+  <div class="bar" id="bar"></div><div class="counter" id="count"></div>
+</section>
+
+<section class="offer" id="offer">
+  <div class="rise"><img id="offimg" alt="Khamrah and Hawas Ice 10 ml decant offer"></div>
+  <div class="rise">
+    <h2 id="offtitle"></h2><p id="offtext"></p>
+    <div class="price"><b id="offprice"></b><s id="offwas"></s></div>
+    <a class="btn" id="offbtn" href="#">Claim this offer</a>
+  </div>
+</section>
+
+<section class="list" id="prices">
+  <h2 class="rise">Full price list</h2>
+  <table class="rise"><thead><tr><th>Perfume</th><th>10 ml</th><th>100 ml</th></tr></thead><tbody id="rows"></tbody></table>
+</section>
+
+<div class="rvh rise"><h2>Said after the first spray</h2><p>Messages from customers. Swipe to read more.</p></div>
+<div class="reviews" id="reviews"></div>
+
+<section class="order" id="how">
+  <h2 class="rise">How to order</h2>
+  <ol class="steps rise">
+    <li><div><b>Choose your scent and size</b><span>Tap 10 ml or 100 ml on any perfume above. A WhatsApp message with your choice opens automatically.</span></div></li>
+    <li><div><b>Send the message</b><span>It goes straight to Trend Scents on <span id="ph"></span>. Add your name and city.</span></div></li>
+    <li><div><b>Confirm in chat</b><span>We reply, agree delivery and payment with you, and pack your order.</span></div></li>
+  </ol>
+</section>
+
+<footer>
+  <div><div class="big">Trend Scents</div><small>Branded perfumes, Sri Lanka.</small></div>
+  <div><a id="igl" href="#" target="_blank" rel="noopener"></a><a id="wal" href="#" target="_blank" rel="noopener"></a></div>
+</footer>
+<a class="fab" data-wa="Hi Trend Scents, I'd like to order a perfume." href="#">WhatsApp us</a>
+
+<script src="assets/data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<script>
+(function(){
+const D=window.TS,$=s=>document.querySelector(s),root=document.documentElement;
+const fmt=n=>"LKR "+n.toLocaleString("en-US");
+const wa=m=>"https://wa.me/"+D.whatsapp+"?text="+encodeURIComponent(m);
+const full=p=>p.brand+" "+p.name+(p.sub?" "+p.sub:"");
+root.classList.replace("no-js","js");
+
+/* fill content */
+$("#soldline").textContent=D.sold.bottles+"+ full bottles and "+D.sold.decants+"+ decants sold so far.";
+$("#tick").innerHTML=[...D.ticker,...D.ticker].map(t=>"<span>"+t+"</span>").join("");
+const shown=D.products.filter(p=>p.img);
+$("#glows").innerHTML=shown.map(p=>'<div style="--g:'+p.glow+'"></div>').join("");
+$("#track").innerHTML=shown.map(p=>{
+  const btn=(sz,pr)=>pr?'<a class="size" target="_blank" rel="noopener" href="'+wa("Hi Trend Scents, I'd like to order "+full(p)+" "+sz+" ("+fmt(pr)+").")+'"><small>'+sz+'</small><b>'+fmt(pr)+'</b></a>'
+    :'<a class="size" target="_blank" rel="noopener" href="'+wa("Hi Trend Scents, is "+full(p)+" "+sz+" available?")+'"><small>'+sz+'</small><b>Ask us</b></a>';
+  return '<article class="panel" style="--g:'+p.glow+'"><figure><img loading="lazy" src="assets/img/'+p.img+'.webp" alt="'+full(p)+' perfume"></figure>'
+   +'<div><p class="brandn">'+p.brand+'</p><h3>'+p.name+(p.sub?'<em>'+p.sub+'</em>':'')+'</h3><p class="mood">'+p.mood+'</p>'
+   +'<div class="sizes">'+btn("10 ml",p.p10)+btn("100 ml",p.p100)+'</div></div></article>';}).join("");
+$("#rows").innerHTML=D.products.map(p=>'<tr class="row" data-m="'+(full(p)).replace(/"/g,"")+'"><td>'+p.name+'<small>'+p.brand+(p.sub?" · "+p.sub:"")+'</small></td><td>'+(p.p10?fmt(p.p10):"on request")+'</td><td>'+fmt(p.p100)+'</td></tr>').join("");
+$("#rows").addEventListener("click",e=>{const r=e.target.closest("tr");if(r)window.open(wa("Hi Trend Scents, I'd like to order "+r.dataset.m+"."),"_blank")});
+$("#reviews").innerHTML=D.reviews.map(r=>'<figure class="rv"><p>“'+r.q+'”</p><cite>'+r.n+'</cite></figure>').join("");
+const o=D.offer;$("#offimg").src=o.img;$("#offtitle").textContent=o.title;$("#offtext").textContent=o.text;
+$("#offprice").textContent=fmt(o.price);$("#offwas").textContent=fmt(o.was);$("#offbtn").href=wa(o.msg);$("#offbtn").target="_blank";
+$("#ph").textContent=D.phoneShow;
+$("#igl").href="https://instagram.com/"+D.instagram;$("#igl").textContent="Instagram  @"+D.instagram;
+$("#wal").href=wa("Hi Trend Scents");$("#wal").textContent="WhatsApp  "+D.phoneShow;
+document.querySelectorAll("[data-wa]").forEach(a=>{a.href=wa(a.dataset.wa);a.target="_blank";a.rel="noopener"});
+
+/* preloader */
+const done=()=>root.classList.add("loaded");
+addEventListener("load",()=>setTimeout(done,900));setTimeout(done,3500);
+
+/* motion: needs libraries, site works without them */
+function motion(){
+  if(!window.gsap||!window.ScrollTrigger)return;
+  gsap.registerPlugin(ScrollTrigger);
+  const reduce=matchMedia("(prefers-reduced-motion:reduce)").matches;
+  if(window.Lenis&&!reduce){const l=new Lenis({lerp:.09});l.on("scroll",ScrollTrigger.update);gsap.ticker.add(t=>l.raf(t*1000));gsap.ticker.lagSmoothing(0)}
+  document.querySelectorAll(".rise").forEach(el=>ScrollTrigger.create({trigger:el,start:"top 88%",once:true,onEnter:()=>el.classList.add("in")}));
+  if(!reduce)gsap.to("#heroimg",{yPercent:-9,rotate:3,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+  const glows=[...document.querySelectorAll("#glows div")],n=glows.length;
+  const setOn=i=>{glows.forEach((g,k)=>g.classList.toggle("on",k===i));$("#count").textContent=(i+1)+" / "+n};
+  setOn(0);
+  const mm=gsap.matchMedia();
+  mm.add("(min-width:900px)",()=>{
+    const tr=$("#track"),dist=()=>tr.scrollWidth-innerWidth;
+    gsap.to(tr,{x:()=>-dist(),ease:"none",scrollTrigger:{trigger:"#collection",pin:true,scrub:.7,start:"top top",end:()=>"+="+dist(),invalidateOnRefresh:true,
+      onUpdate:s=>{setOn(Math.min(n-1,Math.round(s.progress*(n-1))));$("#bar").style.width=(s.progress*100)+"%"}}});
+  });
+  mm.add("(max-width:899px)",()=>{
+    document.querySelectorAll(".panel").forEach((p,i)=>ScrollTrigger.create({trigger:p,start:"top 60%",end:"bottom 40%",onToggle:s=>s.isActive&&setOn(i)}));
+  });
+  addEventListener("load",()=>ScrollTrigger.refresh());
+}
+addEventListener("load",motion);
+})();
+</script>
+</body>
+</html>
